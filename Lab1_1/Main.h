@@ -1,2 +1,3 @@
+typedef std::complex<double> Complex;
 double calculateDelta(double a, double b, double c);
-int quadraticFunction(double a, double b, double c, double & x1, double & x2);
+int quadraticFunction(double a, double b, double c, Complex & x1, Complex & x2);

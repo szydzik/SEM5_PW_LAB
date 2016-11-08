@@ -1,6 +1,8 @@
 #include <iostream> 
 #include <cstdlib> 
 #include <math.h> 
+#include <complex>
+#include <utility>
 #include "Main.h"
 
 using namespace std;
@@ -12,7 +14,7 @@ double calculateDelta(double a, double b, double c)
 	return delta;
 }
 
-int quadraticFunction(double a, double b, double c, double &x1, double &x2) {
+int quadraticFunction(double a, double b, double c, Complex &x1, Complex &x2) {
 	//{	0,	0,	0	}
 	if (a == 0 && b == 0 && c == 0) {
 		return 3; // liczby rzeczywiste
@@ -53,7 +55,7 @@ int quadraticFunction(double a, double b, double c, double &x1, double &x2) {
 			return 2;
 		}
 		//{	+/-,	+/-,	+/-	}
-		int delta = calculateDelta(a, b, c);
+		double delta = calculateDelta(a, b, c);
 		if (delta > 0) {
 			x1 = (-b - sqrt(delta)) / (2 * a);
 			x2 = (-b + sqrt(delta)) / (2 * a);
@@ -64,7 +66,10 @@ int quadraticFunction(double a, double b, double c, double &x1, double &x2) {
 			return 1; //jedno
 		}
 		if (delta < 0) {
-			return 0; //brak
+			Complex root = sqrt((Complex)delta);
+			x1 = (-b - root) / (a*2);
+			x2 = (-b + root) / (a*2);
+			return 0; //brak rozwi¹zañ rzeczywistych - 2 urojone
 		}
 	}
 	return -2;
@@ -84,8 +89,7 @@ int main()
 		cout << "podaj c:" << endl;
 		cin >> c;
 
-		double x1 = 0;
-		double x2 = 0;
+		Complex x1 = 0, x2 = 0;
 
 		int results = quadraticFunction(a, b, c, x1, x2);
 
@@ -95,18 +99,21 @@ int main()
 			break;
 		}
 		case 0: {
-			cout << "Brak rozwi¹zañ rzeczywistych" << endl;
+			cout << "Brak rozwi¹zañ rzeczywistych" << endl
+				<< "Dwa rozwi¹zania wykorzystuj¹ce jednostkê urojon¹:" << endl
+				<< "x1 = " << x1.real() << "+" << x1.imag() << "i" << endl
+				<< "x2 = " << x2.real() << "+" << x2.imag() << "i" << endl;
 			break;
 		}
 		case 1: {
 			cout << "Jedno rozwi¹zanie" << endl
-				<< "x1 = " << x1 << endl;
+				<< "x1 = " << x1.real() << endl;
 			break;
 		}
 		case 2: {
 			cout << "Dwa rozwi¹zania: " << endl
-				<< "x1 = " << x1 << endl
-				<< "x2 = " << x2 << endl;
+				<< "x1 = " << x1.real() << endl
+				<< "x2 = " << x2.real() << endl;
 			break;
 		}
 		case 3: {
@@ -122,3 +129,5 @@ int main()
 	}
 	return 0;
 }
+
+
