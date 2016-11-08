@@ -23,10 +23,16 @@ int quadraticFunction(double a, double b, double c, Complex &x1, Complex &x2) {
 	if (a == 0 && b == 0 && c != 0) {
 		return -1; // brak rozwi¹zañ
 	}
-	//{	0,	+/-,	0	}
+	
 	//{	0,	+/-,	+/-	}
-	if (a == 0) {
+	if (a == 0 && b != 0 && c != 0) {
 		x1 = -1 * c / b;
+		return 1; //jedno
+	}
+
+	//{	0,	+/-,	0	}
+	if (a == 0 && b != 0 && c == 0) {
+		x1 = 0;
 		return 1; //jedno
 	}
 
