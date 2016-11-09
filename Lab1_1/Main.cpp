@@ -107,7 +107,7 @@ int main()
 		case 0: {
 			cout << "Brak rozwi¹zañ rzeczywistych" << endl
 				<< "Dwa rozwi¹zania wykorzystuj¹ce jednostkê urojon¹:" << endl
-				<< "x1 = " << x1.real() << "+" << x1.imag() << "i" << endl
+				<< "x1 = " << x1.real() << x1.imag() << "i" << endl
 				<< "x2 = " << x2.real() << "+" << x2.imag() << "i" << endl;
 			break;
 		}
