@@ -3,18 +3,19 @@
 #include <math.h> 
 #include <complex>
 #include <utility>
-#include "Main.h"
+#include "lab1_1.h"
 
 using namespace std;
 
-double calculateDelta(double a, double b, double c)
+float calculateDelta(float a, float b, float c)
 {
-	double delta;
+	float delta;
 	delta = b*b - 4.0 * a*c;
-	return delta;
+	int temp = (int) delta * 1000;
+	return (float) temp / 1000;
 }
 
-int quadraticFunction(double a, double b, double c, Complex &x1, Complex &x2) {
+int quadraticFunction(float a, float b, float c, Complex &x1, Complex &x2) {
 	//{	0,	0,	0	}
 	if (a == 0 && b == 0 && c == 0) {
 		return 3; // liczby rzeczywiste
@@ -61,7 +62,7 @@ int quadraticFunction(double a, double b, double c, Complex &x1, Complex &x2) {
 			return 2;
 		}
 		//{	+/-,	+/-,	+/-	}
-		double delta = calculateDelta(a, b, c);
+		float delta = calculateDelta(a, b, c);
 		if (delta > 0) {
 			x1 = (-b - sqrt(delta)) / (2 * a);
 			x2 = (-b + sqrt(delta)) / (2 * a);
@@ -85,7 +86,7 @@ int main()
 {
 	setlocale(LC_ALL, "");
 
-	double a, b, c;
+	float a, b, c;
 	for (;;) {
 		system("cls");
 		cout << "podaj a:" << endl;
