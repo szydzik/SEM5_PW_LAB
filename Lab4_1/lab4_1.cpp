@@ -17,6 +17,7 @@
 void sleepcp(int milliseconds);
 double entropia(int oczka[]);
 double calculate(int ilosc);
+void wyswietlWyniki(int nrUderzenia, int oczka[]);
 using namespace std;
 
 
@@ -50,18 +51,23 @@ int main()
 		for (int i = 0; i < L_KOSTEK; i++) {
 			oczka[kostki[i] - 1]++;
 		}
-
-		int temp = 0;
+		
+		wyswietlWyniki(nrUderzenia, oczka);
+		/*int temp = 0;
 		cout << "\n=====Wyniki=====";
 		cout << "\nIteracja: " << nrUderzenia + 1;
 		for (int i = 0; i < L_OCZEK; i++) {
 			cout << "\t\t" << i + 1 << ": " << oczka[i];
 			temp += oczka[i];
 		}
-		cout << "\t\tEntropia: " << entropia(oczka) << "\n";
+		cout << "\t\tEntropia: " << entropia(oczka) << "\n";*/
 		sleepcp(100);
 	}
 	cout << "\n";
+#ifdef WIN32
+	getchar();
+#endif // WIN32
+
 	return 0;
 }
 
@@ -92,6 +98,17 @@ double entropia(int oczka[]) {
 		result -= calculate(oczka[i]);
 	}
 	return result;
+}
+
+void wyswietlWyniki(int nrUderzenia, int oczka[]) {
+	int temp = 0;
+	cout << "\n=====Wyniki=====";
+	cout << "\nIteracja: " << nrUderzenia + 1;
+	for (int i = 0; i < L_OCZEK; i++) {
+		cout << "\t\t" << i + 1 << ": " << oczka[i];
+		temp += oczka[i];
+	}
+	cout << "\t\tEntropia: " << entropia(oczka) << "\n";
 }
 
 
