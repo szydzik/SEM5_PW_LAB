@@ -23,10 +23,10 @@ using namespace std;
 
 int main()
 {
-	cout << "\n=====Inicjalizacja=====\n";
-	cout << "Liczba kostek: \t" << L_KOSTEK;
-	cout << "Liczba oczek(max): \t" << L_OCZEK;
-	cout << "Liczba uderzen: \t" << L_UDERZEN;
+	cout << "\n=====Inicjalizacja=====";
+	cout << "\nLiczba kostek: \t" << L_KOSTEK;
+	cout << "\nLiczba oczek(max): \t" << L_OCZEK;
+	cout << "\nLiczba uderzen: \t" << L_UDERZEN;
 	int kostki[L_KOSTEK];
 	int oczka[L_OCZEK];
 
@@ -35,6 +35,11 @@ int main()
 	{
 		kostki[i] = L_OCZEK;
 	}
+	for (int i = 0; i < L_OCZEK; i++) {
+		oczka[i] = 0;
+	}
+	oczka[L_OCZEK-1] = L_KOSTEK;
+	wyswietlWyniki(0, oczka);
 
 	for (int nrUderzenia = 0; nrUderzenia < L_UDERZEN; nrUderzenia++)
 	{
@@ -61,7 +66,7 @@ int main()
 			temp += oczka[i];
 		}
 		cout << "\t\tEntropia: " << entropia(oczka) << "\n";*/
-		sleepcp(100);
+		sleepcp(1000);
 	}
 	cout << "\n";
 #ifdef WIN32
