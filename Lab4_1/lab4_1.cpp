@@ -9,6 +9,7 @@
 #define L_KOSTEK 6000
 #define L_UDERZEN 100
 #define L_OCZEK 6
+#define OPOZNIENIE 1000
 #include <cstdlib>
 #include <iostream>
 #include <ctime>
@@ -58,15 +59,7 @@ int main()
 		}
 		
 		wyswietlWyniki(nrUderzenia, oczka);
-		/*int temp = 0;
-		cout << "\n=====Wyniki=====";
-		cout << "\nIteracja: " << nrUderzenia + 1;
-		for (int i = 0; i < L_OCZEK; i++) {
-			cout << "\t\t" << i + 1 << ": " << oczka[i];
-			temp += oczka[i];
-		}
-		cout << "\t\tEntropia: " << entropia(oczka) << "\n";*/
-		sleepcp(1000);
+		sleepcp(OPOZNIENIE);
 	}
 	cout << "\n";
 #ifdef WIN32
