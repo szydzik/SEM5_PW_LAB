@@ -62,9 +62,8 @@ int main()
 	int oczka[L_OCZEK];
 	time_t czas = clock();
 	int nrUderzenia, i, nrKostki;
-	int tid;
 
-	//ustawianie max wartosci oczek na akzdej kostce
+	//ustawianie max wartosci oczek na kazdej kostce
 	int i1;
 
 #pragma omp parallel for shared(kostki) private(i1) default(none)
@@ -106,7 +105,7 @@ int main()
 			oczka[kostki[i1] - 1]++;
 		}
 
-		wyswietlWyniki(nrUderzenia, oczka);
+		wyswietlWyniki(nrUderzenia + 1 ,oczka);
 
 		//sleepcp(OPOZNIENIE);
 	}
@@ -158,19 +157,19 @@ double entropia(int oczka[]) {
 void wyswietlWyniki(int nrUderzenia, int oczka[]) {
 	int temp = 0;
 	cout << "\n=====Wyniki=====";
-	cout << "\nIteracja: " << nrUderzenia + 1;
+	cout << "\nIteracja: " << nrUderzenia;
 
 	int i = 0;
 
-#pragma omp parallel for shared(oczka,temp) private(i) default(none)
+#pragma omp parallel for shared(oczka,cout) private(i) default(none) reduction(+ : temp)
 		for (i = 0; i < L_OCZEK; i++){
 #pragma omp critical
 			{
 				cout << "\t\t" << i + 1 << ": " << oczka[i];
-				temp += oczka[i];
 			}
+			temp += oczka[i];
 		}
-	cout << "\t\tEntropia: " << entropia(oczka) << "\n";
+	cout << "\t\tEntropia dla " << temp << " kostek: " << entropia(oczka) << "\n";
 }
 
 
