@@ -34,9 +34,11 @@ int main()
 	time_t czas = clock();
 	cout << "=====Inicjalizacja zakonczona=====\n";
 
+#pragma omp parallel for 
 	for (int ii = 0; ii < 100; ii++) {
 		zzi = dzz*(ii + 1.0);
 		results[ii] = calculateIntegral(zzi, lowerLimit, upperLimit);
+#pragma omp critical
 		cout << ii + 1 << "\t" << results[ii] << endl;
 	}
 
