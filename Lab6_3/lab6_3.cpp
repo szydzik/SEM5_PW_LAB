@@ -34,11 +34,11 @@ int main()
 	time_t czas = clock();
 	cout << "=====Inicjalizacja zakonczona=====\n";
 
-	//#pragma omp parallel for 
+#pragma omp parallel for 
 	for (int ii = 0; ii < 100; ii++) {
 		zzi = dzz*(ii + 1.0);
 		results[ii] = calculateIntegral(zzi, lowerLimit, upperLimit);
-		//#pragma omp critical
+#pragma omp critical
 		cout << ii + 1 << "\t" << results[ii] << endl;
 	}
 
@@ -84,10 +84,10 @@ double calculateIntegral(double zz, double lowerLimit, double upperLimit) {
 	dx = (upperLimit - lowerLimit) / 2000.0;
 	dy = (upperLimit - lowerLimit) / 2000.0;
 	xi = 0.0;
-
 	for (int ii = 1; ii <= 2000; ii++) {
 		xi = xi + dx;
 		yj = 0.0;
+#pragma omp parallel for reduction(+:sum)
 		for (int jj = 1; jj <= 2000; jj++) {
 			yj = yj + dy;
 			sum = sum + func(xi, yj, zz);
